@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ank.dao.entities.CourseEntity;
 
-public interface CourseRepo extends JpaRepository<CourseEntity, Integer>  {
+public interface CourseRepo extends JpaRepository<CourseEntity, String>  {
 
 	/*
 	Page<CourseEntity> findByAuthorId(int authorId, Pageable pageable);

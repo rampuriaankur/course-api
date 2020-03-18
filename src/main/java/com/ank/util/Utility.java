@@ -11,7 +11,12 @@ import com.ank.model.Course;
 public class Utility {
 
 	public static List<Course> mapCourseEntityList(List<CourseEntity> courseEntityList) {
+
 		List<Course> courseList = new ArrayList<>();
+
+		if (courseEntityList == null || courseEntityList.size() <= 0)
+			return courseList;
+
 		courseEntityList.forEach(entity -> {
 			Course course = new Course();
 			course.setId(entity.getCourseId());
@@ -34,7 +39,9 @@ public class Utility {
 		return courseList;
 	}
 
-	public static  Course mapCourseEntity(CourseEntity entity) {
+	public static Course mapCourseEntity(CourseEntity entity) {
+		if (entity == null)
+			return null;
 		Course course = new Course();
 		course.setId(entity.getCourseId());
 		course.setSlug(entity.getSlug());
