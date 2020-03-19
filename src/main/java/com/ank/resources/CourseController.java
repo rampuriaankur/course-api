@@ -10,9 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ank.dao.entities.CategoryEntity;
 import com.ank.dao.entities.CourseEntity;
 import com.ank.dao.repo.AuthorRepo;
 import com.ank.dao.repo.CategoryRepo;
@@ -32,9 +34,6 @@ public class CourseController {
 	@Autowired
 	private CategoryRepo categoryRepo;
 
-
-
-
 	@GetMapping(value = "/courses", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Course>> getCourse() {
 		List<Course> courseList = new ArrayList<Course>();
@@ -50,7 +49,7 @@ public class CourseController {
 		Course course = Utility.mapCourseEntity(courseEntity);
 		return ResponseEntity.status(HttpStatus.OK).body(course);
 	}
-	
+
 	@PostMapping(value = "/courses", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Course> createCourse(@RequestBody Course course) {
 		CourseEntity savedCourseEntity = new CourseEntity();
@@ -64,6 +63,31 @@ public class CourseController {
 			entity.setTitle(course.getTitle());
 			entity.setSlug(course.getSlug());
 			savedCourseEntity = courseRepo.save(entity);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(Utility.mapCourseEntity(savedCourseEntity));
+
+	}
+	
+	@PutMapping(value = "/courses/{courseId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Course> updateCourse( @PathVariable("courseId") String courseId ,@RequestBody Course course) {
+		CourseEntity savedCourseEntity = new CourseEntity();
+		try {
+			CourseEntity entity = new CourseEntity();
+			entity.setAuthor(
+					authorRepo.findById(course.getAuthorId()).orElseThrow(() -> new Exception("Author Id is invalid")));
+
+			entity.setCategory(categoryRepo.findById(course.getCategoryId())
+					.orElseThrow(() -> new Exception("Category Id is Invalid")));
+			entity.setTitle(course.getTitle());
+			entity.setSlug(course.getSlug());
+			entity.setCourseId(courseId);
+			
+			//entity.setCategory(course.getCategoryName());
+			savedCourseEntity = courseRepo.saveAndFlush(entity);
 
 		} catch (Exception e) {
 			e.printStackTrace();

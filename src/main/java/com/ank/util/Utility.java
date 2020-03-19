@@ -6,6 +6,7 @@ import java.util.List;
 import com.ank.dao.entities.AuthorEntity;
 import com.ank.dao.entities.CategoryEntity;
 import com.ank.dao.entities.CourseEntity;
+import com.ank.model.Author;
 import com.ank.model.Course;
 
 public class Utility {
@@ -51,17 +52,28 @@ public class Utility {
 			course.setAuthorId(author.getAuthorId());
 			course.setAuthorName(author.getAuthorName());
 		}
-		if (author != null) {
-			course.setAuthorId(author.getAuthorId());
-			course.setAuthorName(author.getAuthorName());
-		}
 		CategoryEntity category = entity.getCategory();
 		if (category != null) {
 			course.setCategoryId(category.getCategoryId());
-			course.setAuthorName(category.getCategoryName());
+			course.setCategoryName(category.getCategoryName());
 		}
 
 		return course;
+	}
+
+	public static List<Author> mapAuthorEntityList(List<AuthorEntity> authorEntityList) {
+		List<Author> authorList = new ArrayList<>();
+		if (authorEntityList == null || authorEntityList.size() <= 0)
+			return authorList;
+		authorEntityList.forEach(entity -> {
+			Author author = new Author();
+			author.setId(entity.getAuthorId());
+			author.setAuthorName(entity.getAuthorName());
+			authorList.add(author);
+		});
+
+		return authorList;
+
 	}
 
 }
