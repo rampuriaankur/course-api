@@ -1,5 +1,14 @@
 use course_db;
 
+
+use course_db;
+
+
+ CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+);
+
+
 CREATE TABLE `author` (
   `author_id` varchar(45) NOT NULL,
   `author_name` varchar(45) DEFAULT NULL,
@@ -26,5 +35,4 @@ CREATE TABLE `course` (
   CONSTRAINT `categoryfk` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`)
 ) ;
 
-
-
+  
