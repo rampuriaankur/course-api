@@ -1,4 +1,4 @@
-package com.ank.util;
+package com.ank.utils;
 
 import java.util.ArrayList;
 import java.util.List;

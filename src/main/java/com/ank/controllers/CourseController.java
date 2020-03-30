@@ -1,27 +1,18 @@
-package com.ank.resources;
+package com.ank.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.ank.dao.entities.CategoryEntity;
 import com.ank.dao.entities.CourseEntity;
 import com.ank.dao.repo.AuthorRepo;
 import com.ank.dao.repo.CategoryRepo;
 import com.ank.dao.repo.CourseRepo;
 import com.ank.model.Course;
-import com.ank.util.Utility;
+import com.ank.utils.Utility;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController()
 public class CourseController {

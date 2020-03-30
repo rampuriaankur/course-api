@@ -1,4 +1,4 @@
-package com.ank.resources;
+package com.ank.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ank.dao.entities.AuthorEntity;
 import com.ank.dao.repo.AuthorRepo;
 import com.ank.model.Author;
-import com.ank.util.Utility;
+import com.ank.utils.Utility;
 
 @RestController
 public class AuthorController {
